@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { preview } from '../assets';
+import { API_BASE_URL } from '../config';
 import { getRandomPrompt } from '../utils';
 import { FormField, Loader } from "../components";
 
@@ -20,7 +21,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('https://dalle-4yj8.onrender.com/api/v1/dalle', {
+        const response = await fetch(`${API_BASE_URL}/api/v1/dalle`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ const CreatePost = () => {
       setLoading(true);
 
       try {
-        const response = await fetch('https://dalle-4yj8.onrender.com/api/v1/post', {
+        const response = await fetch(`${API_BASE_URL}/api/v1/post`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
