@@ -1,0 +1,4 @@
+# When Netlify "base directory" is `client`, this file is used.
+# Vite 8 + Rolldown need Node ^20.19 or >=22.12 (util.styleText).
+[build.environment]
+  NODE_VERSION = "22"

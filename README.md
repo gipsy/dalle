@@ -62,7 +62,7 @@ server/          # Express API
 
 ### Prerequisites
 
-- Node.js (LTS) and npm
+- **Node.js** and npm — **`server/package.json`** declares **`engines.node`** for **22+**. The **client** stack (Vite 8, React Router 7) still needs **Node 20.19+** or **22+** to build; Netlify must not use Node 16.
 - **MongoDB** URL if you use the gallery / share flow
 - **OpenAI API key** for generation
 - **Cloudinary** account if you use **share** (image upload)
@@ -126,6 +126,10 @@ cd client
 npm run build
 npm run preview
 ```
+
+### Netlify
+
+If **Base directory** is `client`, keep using Node **20.19+** or **22**. The repo includes **`netlify.toml`** (root) with `NODE_VERSION = "22"` and **`client/.nvmrc`** so the build does not fall back to Node 16 (which breaks Vite 8 / Rolldown with `util.styleText`).
 
 ---
 
