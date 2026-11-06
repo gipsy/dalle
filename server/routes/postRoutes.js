@@ -1,10 +1,7 @@
 import express from 'express';
-import * as dotenv from 'dotenv';
 import { v2 as cloudinary } from 'cloudinary';
 
 import Post from '../mongodb/models/post.js';
-
-dotenv.config();
 
 const router = express.Router();
 
@@ -39,7 +36,11 @@ router.route('/').post(async (req, res) => {
 
     res.status(201).json({ success: true, data: newPost });
   } catch (error) {
-    res.status(500).json({ success: false, message: error });
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error?.message ?? 'Creating post failed, please try again',
+    });
   }
 })
 
