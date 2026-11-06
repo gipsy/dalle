@@ -25,4 +25,7 @@ dist-ssr
 
 .env
 
-.nvmrc
+client/.nvmrc
+
+# Local Netlify CLI state (netlify link)
+.netlify
