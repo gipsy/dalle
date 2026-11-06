@@ -29,11 +29,18 @@ const CreatePost = () => {
           body: JSON.stringify({ prompt: form.prompt }),
         });
 
-        const data = await response.json();
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const msg = data?.message ?? data?.error ?? `Image generation failed (${response.status})`;
+          throw new Error(msg);
+        }
+        if (!data?.photo) {
+          throw new Error('No image returned from the server');
+        }
 
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` })
       } catch (error) {
-        alert(error);
+        alert(error instanceof Error ? error.message : String(error));
       } finally {
         setGeneratingImg(false);
       }
@@ -57,10 +64,17 @@ const CreatePost = () => {
           body: JSON.stringify(form)
         })
 
-        await response.json();
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const msg = data?.message ?? `Could not save post (${response.status})`;
+          throw new Error(msg);
+        }
+        if (data.success === false) {
+          throw new Error(data.message ?? 'Could not save post');
+        }
         navigate('/');
       } catch (err) {
-        alert(err);
+        alert(err instanceof Error ? err.message : String(err));
       } finally {
         setLoading(false);
       }

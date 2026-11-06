@@ -1,4 +1,0 @@
-# Netlify: Vite 8 + Rolldown require Node ^20.19 or >=22.12 (util.styleText).
-# See: https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript
-[build.environment]
-  NODE_VERSION = "22"

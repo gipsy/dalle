@@ -1,4 +1,13 @@
 # When Netlify "base directory" is `client`, this file is used.
 # Vite 8 + Rolldown need Node ^20.19 or >=22.12 (util.styleText).
+#
+# Do not put MONGODB_URL here: this site is static; MongoDB lives on your API host
+# (Render, Railway, etc.). Point the UI at that API with VITE_API_BASE_URL in Netlify env.
 [build.environment]
   NODE_VERSION = "22"
+
+# SPA: direct loads / refreshes on /create-post etc. must serve index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
